@@ -40,13 +40,13 @@ impl Cancellable for Service {
         }
 
         if let Ok(user_input) = String::from_utf8(buffer) {
-            // If user types "STOP" service should stop accepting new connections
+            // If the user types "STOP", the service should stop accepting new connections
             if user_input == "STOP" {
                 let _ = tcp_stream.write_all(b"Stopping the service ...\n");
                 return Ok(LoopStep::Break);
             }
 
-            // Reverse user input and send it back
+            // Reverse the user input and send it back
             let reversed_user_input = user_input.chars().rev().collect::<String>();
 
             let _ = writeln!(tcp_stream, ">> {}", reversed_user_input);
@@ -66,7 +66,7 @@ impl Service {
 }
 
 fn main() -> io::Result<()> {
-    // Create new cancellable service ($ nc 127.0.0.1 6556)
+    // Create new cancellable service ($nc 127.0.0.1 6556)
     let service = Service::new("127.0.0.1:6556");
 
     // Spawn execution loop in a new thread
