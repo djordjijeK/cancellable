@@ -1,4 +1,3 @@
-use std::ops::Deref;
 use std::sync::atomic::AtomicBool;
 use std::sync::atomic::Ordering;
 use std::sync::Arc;
